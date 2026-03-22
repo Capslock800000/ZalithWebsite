@@ -69,7 +69,7 @@ export const useLatestRelease = (project: 'zl1' | 'zl2', currentLang: string) =>
   const localVersionFile = project === 'zl1' ? '/version.json' : '/version2.json';
   const versionInfoUrl = project === 'zl1' 
     ? 'https://fcl.lemwood.icu/zalith-info/launcher_version.json'
-    : 'https://fcl.lemwood.icu/zalith-info/v2/latest_version.json';
+    : 'https://fcl.lemwood.icu/zalith-info/v2/latest_version_md.json';
 
   useEffect(() => {
     let isMounted = true;
@@ -274,7 +274,6 @@ export const useLatestRelease = (project: 'zl1' | 'zl2', currentLang: string) =>
       if (lang.includes('zh')) return desc.zh_cn || desc.en_us;
       return desc.en_us || desc.zh_cn;
     } else {
-      // ZL2 logic
       const bodies = versionJsonData.bodies || [];
       const defaultBody = versionJsonData.default_body;
       const lang = currentLang.toLowerCase();
@@ -288,27 +287,8 @@ export const useLatestRelease = (project: 'zl1' | 'zl2', currentLang: string) =>
 
       if (!targetBody) targetBody = defaultBody;
 
-      if (targetBody && targetBody.chunks) {
-        return targetBody.chunks.map((chunk: any) => {
-          let markdown = '';
-          if (chunk.title) markdown += `### ${chunk.title}\n\n`;
-          if (chunk.texts) {
-            chunk.texts.forEach((item: any) => {
-              let line = '';
-              if (item.indentation) line += '  '.repeat(item.indentation);
-              line += '- ';
-              let textContent = item.text || '';
-              if (item.links) {
-                item.links.forEach((link: any) => {
-                  textContent += ` [${link.text}](${link.link})`;
-                });
-              }
-              line += textContent + '\n';
-              markdown += line;
-            });
-          }
-          return markdown;
-        }).join('\n\n');
+      if (targetBody && targetBody.markdown) {
+        return targetBody.markdown;
       }
     }
     return null;

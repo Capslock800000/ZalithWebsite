@@ -416,7 +416,7 @@ async function fetchLemwoodData() {
 
 // 获取远程 JSON 版本数据
 async function fetchVersionJsonData() {
-  const url = 'https://fcl.lemwood.icu/zalith-info/v2/latest_version.json'
+  const url = 'https://fcl.lemwood.icu/zalith-info/v2/latest_version_md.json'
   try {
     const response = await fetch(url)
     if (!response.ok) throw new Error('Fetch version json failed')
@@ -427,38 +427,6 @@ async function fetchVersionJsonData() {
   }
 }
 
-// 将 chunks 转换为 Markdown
-function chunksToMarkdown(chunks: any[]) {
-  if (!chunks || !chunks.length) return ''
-  let markdown = ''
-  chunks.forEach(chunk => {
-    if (chunk.title) {
-      markdown += `### ${chunk.title}\n\n`
-    }
-    if (chunk.texts) {
-      chunk.texts.forEach((item: any) => {
-        let line = ''
-        if (item.indentation) {
-          line += '  '.repeat(item.indentation)
-        }
-        line += '- '
-        
-        let textContent = item.text || ''
-        if (item.links) {
-          item.links.forEach((link: any) => {
-            textContent += ` [${link.text}](${link.link})`
-          })
-        }
-        line += textContent + '\n'
-        markdown += line
-      })
-    }
-    markdown += '\n'
-  })
-  return markdown
-}
-
-// 本地化描述计算属性
 const localizedDescription = computed(() => {
   if (!versionJsonData.value) return null
   
@@ -466,7 +434,6 @@ const localizedDescription = computed(() => {
   const bodies = versionJsonData.value.bodies || []
   const defaultBody = versionJsonData.value.default_body
   
-  // 查找匹配的语言
   let targetBody = null
   if (currentLang.includes('zh')) {
     targetBody = bodies.find((b: any) => b.language === 'zh')
@@ -474,11 +441,10 @@ const localizedDescription = computed(() => {
     targetBody = bodies.find((b: any) => b.language === 'en')
   }
   
-  // 如果没有找到匹配的语言，尝试使用默认 body
   if (!targetBody) targetBody = defaultBody
   
-  if (targetBody && targetBody.chunks) {
-    return chunksToMarkdown(targetBody.chunks)
+  if (targetBody && targetBody.markdown) {
+    return targetBody.markdown
   }
   
   return null
