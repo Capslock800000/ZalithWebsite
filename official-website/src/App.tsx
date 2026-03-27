@@ -6,6 +6,8 @@ import DownloadPage from './pages/DownloadPage';
 import PrivacyPage from './pages/PrivacyPage';
 import BlogListPage from './pages/BlogListPage';
 import BlogPostPage from './pages/BlogPostPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -18,6 +20,10 @@ const AppContent = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isAdminPage = location.pathname.startsWith('/admin');
+  const isAuthPage = location.pathname === '/login' || 
+                     location.pathname === '/register' ||
+                     location.pathname.endsWith('/login') || 
+                     location.pathname.endsWith('/register');
 
   if (isAdminPage && location.pathname !== '/admin/login') {
     return (
@@ -30,6 +36,22 @@ const AppContent = () => {
           <Route path="comments/pending" element={<PendingComments />} />
         </Route>
       </Routes>
+    );
+  }
+
+  if (isAuthPage) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="pt-16">
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/:lang/login" element={<LoginPage />} />
+            <Route path="/:lang/register" element={<RegisterPage />} />
+          </Routes>
+        </main>
+      </div>
     );
   }
 

@@ -3,6 +3,7 @@ import { Sun, Moon, Github, Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import UserMenu from './auth/UserMenu';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -29,6 +30,7 @@ const Navbar = () => {
   const navLinks = [
     { name: t('nav.home'), path: '/' },
     { name: t('nav.features'), path: '/#features' },
+    { name: t('nav.blog'), path: '/blog' },
     { name: t('nav.download'), path: '/download' },
     { name: t('nav.docs'), path: 'https://www.zalithlauncher.cn/docs/projects/zl2', external: true },
   ];
@@ -97,6 +99,7 @@ const Navbar = () => {
             <a href="https://github.com/ZalithLauncher" target="_blank" rel="noreferrer">
               <Github size={20} className="text-[var(--text-2)] hover:text-[var(--brand)] transition-colors" />
             </a>
+            <UserMenu />
           </div>
 
           {/* Mobile Menu Button */}
@@ -159,6 +162,9 @@ const Navbar = () => {
               <a href="https://github.com/ZalithLauncher" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-lg text-[var(--text-2)] hover:text-[var(--brand)]">
                 <Github size={20} /> GitHub
               </a>
+              <div className="pt-2 border-t border-[var(--divider)]/20">
+                <UserMenu />
+              </div>
             </div>
           </motion.div>
         )}

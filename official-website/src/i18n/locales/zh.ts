@@ -20,6 +20,7 @@ export default {
   nav: {
     home: "首页",
     features: "特性",
+    blog: "博客",
     download: "下载",
     docs: "文档",
   },
@@ -184,6 +185,8 @@ Zalith Launcher（以下简称"我们"）深知隐私对您的重要性，并致
     login: "登录",
     register: "注册",
     logout: "退出登录",
+    loginSubtitle: "登录您的账号",
+    registerSubtitle: "创建一个新账号",
     email: "邮箱",
     emailPlaceholder: "请输入邮箱",
     username: "用户名",
@@ -198,6 +201,8 @@ Zalith Launcher（以下简称"我们"）深知隐私对您的重要性，并致
     hasAccount: "已有账号？",
     loginFailed: "登录失败，请检查邮箱和密码",
     registerFailed: "注册失败，请稍后重试",
+    registerSuccess: "注册成功",
+    registerSuccessDesc: "请前往登录页面登录您的账号",
   },
   admin: {
     dashboard: "后台管理",

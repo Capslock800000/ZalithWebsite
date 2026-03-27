@@ -2,20 +2,35 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"blog-server/config"
 	"blog-server/database"
 	"blog-server/handlers"
 	"blog-server/middleware"
+	"blog-server/services/email"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("未找到 .env 文件，使用环境变量")
+	}
+
 	cfg := config.Load()
 
 	if err := database.Init(&cfg.Database); err != nil {
-		log.Fatalf("Failed to initialize database: %v", err)
+		log.Fatalf("数据库初始化失败: %v", err)
+	}
+
+	var emailSvc *email.Service
+	if cfg.SMTP.User != "" && cfg.SMTP.Password != "" {
+		emailSvc = email.NewService(cfg)
+		log.Println("邮件服务已初始化")
+	} else {
+		log.Println("邮件服务未配置，跳过")
 	}
 
 	r := gin.Default()
@@ -25,8 +40,10 @@ func main() {
 	{
 		auth := api.Group("/auth")
 		{
-			auth.POST("/register", handlers.Register(cfg))
+			auth.POST("/register", handlers.Register(cfg, emailSvc))
 			auth.POST("/login", handlers.Login(cfg))
+			auth.POST("/verify-email", handlers.VerifyEmail(cfg, emailSvc))
+			auth.POST("/resend-verify", handlers.ResendVerifyEmail(cfg, emailSvc))
 		}
 
 		authProtected := api.Group("/auth")
@@ -67,8 +84,13 @@ func main() {
 		}
 	}
 
-	log.Printf("Server starting on port %s", cfg.ServerPort)
-	if err := r.Run(":" + cfg.ServerPort); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = cfg.ServerPort
+	}
+
+	log.Printf("服务器启动于端口 %s", port)
+	if err := r.Run(":" + port); err != nil {
+		log.Fatalf("服务器启动失败: %v", err)
 	}
 }

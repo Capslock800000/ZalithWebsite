@@ -41,7 +41,7 @@ const TableOfContents = ({ items }: TableOfContentsProps) => {
 
   return (
     <nav className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
-      <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+      <h4 className="text-sm font-semibold text-[var(--text-2)] uppercase tracking-wider mb-4">
         Table of Contents
       </h4>
       <ul className="space-y-2">
@@ -52,7 +52,7 @@ const TableOfContents = ({ items }: TableOfContentsProps) => {
               className={`text-sm text-left w-full py-1 px-2 rounded transition-colors ${
                 activeId === item.id
                   ? 'text-[var(--brand)] bg-[var(--brand)]/10'
-                  : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
+                  : 'text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--divider)]/10'
               }`}
               style={{ paddingLeft: `${(item.level - 1) * 12}px` }}
             >

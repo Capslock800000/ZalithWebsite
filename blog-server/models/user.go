@@ -22,15 +22,18 @@ const (
 )
 
 type User struct {
-	ID           uint      `gorm:"primaryKey" json:"id"`
-	Email        string    `gorm:"uniqueIndex;not null" json:"email"`
-	Username     string    `gorm:"uniqueIndex;not null" json:"username"`
-	PasswordHash string    `gorm:"not null" json:"-"`
-	AvatarURL    string    `json:"avatarUrl,omitempty"`
-	Role         UserRole  `gorm:"default:user" json:"role"`
-	Status       UserStatus `gorm:"default:active" json:"status"`
-	CreatedAt    time.Time `json:"createdAt"`
-	UpdatedAt    time.Time `json:"updatedAt"`
+	ID             uint      `gorm:"primaryKey" json:"id"`
+	Email          string    `gorm:"uniqueIndex;not null" json:"email"`
+	Username       string    `gorm:"uniqueIndex;not null" json:"username"`
+	PasswordHash   string    `gorm:"not null" json:"-"`
+	AvatarURL      string    `json:"avatarUrl,omitempty"`
+	Role           UserRole  `gorm:"default:user" json:"role"`
+	Status         UserStatus `gorm:"default:active" json:"status"`
+	EmailVerified  bool      `gorm:"default:false" json:"emailVerified"`
+	VerifyCode     string    `gorm:"-" json:"-"`
+	VerifyCodeExp  *time.Time `gorm:"-" json:"-"`
+	CreatedAt      time.Time `json:"createdAt"`
+	UpdatedAt      time.Time `json:"updatedAt"`
 }
 
 func (User) TableName() string {

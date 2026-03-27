@@ -150,7 +150,7 @@ const CommentManagement = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-8">{t('admin.comments.title')}</h1>
+      <h1 className="text-2xl font-bold text-[var(--text-1)] mb-8">{t('admin.comments.title')}</h1>
 
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <div className="flex gap-2">
@@ -161,7 +161,7 @@ const CommentManagement = () => {
               className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                 params.status === tab.status
                   ? 'bg-[var(--brand)] text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                  : 'bg-[var(--bg-alt)] text-[var(--text-2)] hover:bg-[var(--divider)]/20'
               }`}
             >
               {tab.label}
@@ -170,11 +170,11 @@ const CommentManagement = () => {
         </div>
 
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-2)]" />
           <input
             type="text"
             placeholder={t('admin.comments.search')}
-            className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-[var(--brand)]"
+            className="w-full bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-lg pl-10 pr-4 py-2 text-[var(--text-1)] placeholder-[var(--text-2)] focus:outline-none focus:border-[var(--brand)]"
             onChange={(e) => setParams({ ...params, search: e.target.value })}
             onKeyDown={(e) => e.key === 'Enter' && fetchComments()}
           />
@@ -212,56 +212,56 @@ const CommentManagement = () => {
         </div>
       )}
 
-      <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-[var(--divider)]/20">
                 <th className="px-6 py-4">
                   <input
                     type="checkbox"
                     checked={selectedIds.length === comments.length && comments.length > 0}
                     onChange={toggleSelectAll}
-                    className="rounded border-white/20 bg-white/5"
+                    className="rounded border-[var(--divider)] bg-[var(--bg)]"
                   />
                 </th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">ID</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">User</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">Post</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">Content</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">Status</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">Date</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">Actions</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">ID</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">User</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">Post</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">Content</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">Status</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">Date</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">Actions</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-gray-400">
+                  <td colSpan={8} className="px-6 py-12 text-center text-[var(--text-2)]">
                     {t('common.loading')}
                   </td>
                 </tr>
               ) : comments.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-gray-400">
+                  <td colSpan={8} className="px-6 py-12 text-center text-[var(--text-2)]">
                     No comments found
                   </td>
                 </tr>
               ) : (
                 comments.map((comment) => (
-                  <tr key={comment.id} className="border-b border-white/5 hover:bg-white/5">
+                  <tr key={comment.id} className="border-b border-[var(--divider)]/10 hover:bg-[var(--divider)]/5">
                     <td className="px-6 py-4">
                       <input
                         type="checkbox"
                         checked={selectedIds.includes(comment.id)}
                         onChange={() => toggleSelect(comment.id)}
-                        className="rounded border-white/20 bg-white/5"
+                        className="rounded border-[var(--divider)] bg-[var(--bg)]"
                       />
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-300">{comment.id}</td>
-                    <td className="px-6 py-4 text-sm text-white">{comment.user.username}</td>
-                    <td className="px-6 py-4 text-sm text-gray-300">{comment.postSlug}</td>
-                    <td className="px-6 py-4 text-sm text-gray-300 max-w-xs truncate">
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{comment.id}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-1)]">{comment.user.username}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{comment.postSlug}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)] max-w-xs truncate">
                       {comment.content}
                     </td>
                     <td className="px-6 py-4">
@@ -269,7 +269,7 @@ const CommentManagement = () => {
                         {comment.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-300">{formatDate(comment.createdAt)}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{formatDate(comment.createdAt)}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
                         {comment.status !== 'approved' && (
@@ -312,17 +312,17 @@ const CommentManagement = () => {
           <button
             onClick={() => setParams({ ...params, page: (params.page || 1) - 1 })}
             disabled={params.page === 1}
-            className="px-4 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 disabled:opacity-50"
+            className="px-4 py-2 bg-[var(--bg-alt)] text-[var(--text-2)] rounded-lg hover:bg-[var(--divider)]/20 disabled:opacity-50"
           >
             Previous
           </button>
-          <span className="px-4 py-2 text-gray-400">
+          <span className="px-4 py-2 text-[var(--text-2)]">
             Page {params.page} of {Math.ceil(total / 10)}
           </span>
           <button
             onClick={() => setParams({ ...params, page: (params.page || 1) + 1 })}
             disabled={(params.page || 1) >= Math.ceil(total / 10)}
-            className="px-4 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 disabled:opacity-50"
+            className="px-4 py-2 bg-[var(--bg-alt)] text-[var(--text-2)] rounded-lg hover:bg-[var(--divider)]/20 disabled:opacity-50"
           >
             Next
           </button>

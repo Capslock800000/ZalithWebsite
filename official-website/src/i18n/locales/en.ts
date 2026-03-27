@@ -20,6 +20,7 @@ export default {
   nav: {
     home: "Home",
     features: "Features",
+    blog: "Blog",
     download: "Download",
     docs: "Docs",
   },
@@ -184,6 +185,8 @@ We may update this Privacy Policy from time to time. We recommend checking this 
     login: "Login",
     register: "Register",
     logout: "Logout",
+    loginSubtitle: "Sign in to your account",
+    registerSubtitle: "Create a new account",
     email: "Email",
     emailPlaceholder: "Enter your email",
     username: "Username",
@@ -198,6 +201,8 @@ We may update this Privacy Policy from time to time. We recommend checking this 
     hasAccount: "Already have an account?",
     loginFailed: "Login failed. Please check your email and password.",
     registerFailed: "Registration failed. Please try again later.",
+    registerSuccess: "Registration Successful",
+    registerSuccessDesc: "Please go to the login page to sign in to your account",
   },
   admin: {
     dashboard: "Admin Dashboard",

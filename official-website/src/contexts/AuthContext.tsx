@@ -40,8 +40,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         },
       });
       if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
+        const result = await response.json();
+        setUser(result.data?.user || result.user);
       } else {
         setStoredTokens(null);
         setUser(null);
@@ -74,12 +74,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message || 'Login failed');
+      throw new Error(error.error || error.message || 'Login failed');
     }
 
     const result = await response.json();
-    setStoredTokens(result.tokens);
-    setUser(result.user);
+    const authData = result.data || result;
+    setStoredTokens(authData.tokens);
+    setUser(authData.user);
   };
 
   const register = async (data: RegisterRequest) => {
@@ -93,12 +94,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message || 'Registration failed');
+      throw new Error(error.error || error.message || 'Registration failed');
     }
 
     const result = await response.json();
-    setStoredTokens(result.tokens);
-    setUser(result.user);
+    const authData = result.data || result;
+    setStoredTokens(authData.tokens);
+    setUser(authData.user);
   };
 
   const logout = () => {

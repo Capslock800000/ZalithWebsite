@@ -141,54 +141,54 @@ const UserManagement = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-8">{t('admin.users.title')}</h1>
+      <h1 className="text-2xl font-bold text-[var(--text-1)] mb-8">{t('admin.users.title')}</h1>
 
       <form onSubmit={handleSearch} className="mb-6">
         <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-2)]" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t('admin.users.search')}
-            className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-[var(--brand)]"
+            className="w-full bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-lg pl-10 pr-4 py-2 text-[var(--text-1)] placeholder-[var(--text-2)] focus:outline-none focus:border-[var(--brand)]"
           />
         </div>
       </form>
 
-      <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-white/10">
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">ID</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('auth.username')}</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('auth.email')}</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('admin.users.role')}</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('admin.users.status')}</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('admin.users.createdAt')}</th>
-                <th className="text-left px-6 py-4 text-sm font-medium text-gray-400">{t('admin.users.actions')}</th>
+              <tr className="border-b border-[var(--divider)]/20">
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">ID</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('auth.username')}</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('auth.email')}</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('admin.users.role')}</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('admin.users.status')}</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('admin.users.createdAt')}</th>
+                <th className="text-left px-6 py-4 text-sm font-medium text-[var(--text-2)]">{t('admin.users.actions')}</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-400">
+                  <td colSpan={7} className="px-6 py-12 text-center text-[var(--text-2)]">
                     {t('common.loading')}
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-400">
+                  <td colSpan={7} className="px-6 py-12 text-center text-[var(--text-2)]">
                     No users found
                   </td>
                 </tr>
               ) : (
                 users.map((user) => (
-                  <tr key={user.id} className="border-b border-white/5 hover:bg-white/5">
-                    <td className="px-6 py-4 text-sm text-gray-300">{user.id}</td>
-                    <td className="px-6 py-4 text-sm text-white">{user.username}</td>
-                    <td className="px-6 py-4 text-sm text-gray-300">{user.email}</td>
+                  <tr key={user.id} className="border-b border-[var(--divider)]/10 hover:bg-[var(--divider)]/5">
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{user.id}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-1)]">{user.username}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{user.email}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 rounded text-xs ${getRoleBadge(user.role)}`}>
                         {user.role}
@@ -199,12 +199,12 @@ const UserManagement = () => {
                         {user.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-300">{formatDate(user.createdAt)}</td>
+                    <td className="px-6 py-4 text-sm text-[var(--text-2)]">{formatDate(user.createdAt)}</td>
                     <td className="px-6 py-4">
                       <div className="relative">
                         <button
                           onClick={() => setOpenMenu(openMenu === user.id ? null : user.id)}
-                          className="text-gray-400 hover:text-white"
+                          className="text-[var(--text-2)] hover:text-[var(--text-1)]"
                         >
                           <MoreVertical className="w-5 h-5" />
                         </button>
@@ -214,37 +214,37 @@ const UserManagement = () => {
                               className="fixed inset-0 z-10"
                               onClick={() => setOpenMenu(null)}
                             />
-                            <div className="absolute right-0 mt-2 w-48 bg-[#2a2a2a] border border-white/10 rounded-lg shadow-lg z-20 overflow-hidden">
+                            <div className="absolute right-0 mt-2 w-48 bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-lg shadow-lg z-20 overflow-hidden">
                               <div className="py-1">
-                                <div className="px-3 py-2 text-xs text-gray-500 border-b border-white/10">
+                                <div className="px-3 py-2 text-xs text-[var(--text-2)] border-b border-[var(--divider)]/20">
                                   {t('admin.users.changeRole')}
                                 </div>
                                 <button
                                   onClick={() => updateRole(user.id, 'admin')}
-                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-300 hover:bg-white/5"
+                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-[var(--text-2)] hover:bg-[var(--divider)]/10"
                                 >
                                   <Shield className="w-4 h-4" />
                                   Admin
                                 </button>
                                 <button
                                   onClick={() => updateRole(user.id, 'moderator')}
-                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-300 hover:bg-white/5"
+                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-[var(--text-2)] hover:bg-[var(--divider)]/10"
                                 >
                                   <Shield className="w-4 h-4" />
                                   Moderator
                                 </button>
                                 <button
                                   onClick={() => updateRole(user.id, 'user')}
-                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-300 hover:bg-white/5"
+                                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-[var(--text-2)] hover:bg-[var(--divider)]/10"
                                 >
                                   <Shield className="w-4 h-4" />
                                   User
                                 </button>
-                                <div className="border-t border-white/10 mt-1 pt-1">
+                                <div className="border-t border-[var(--divider)]/20 mt-1 pt-1">
                                   {user.status === 'active' ? (
                                     <button
                                       onClick={() => updateStatus(user.id, 'disabled')}
-                                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-yellow-400 hover:bg-white/5"
+                                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-yellow-400 hover:bg-[var(--divider)]/10"
                                     >
                                       <Ban className="w-4 h-4" />
                                       {t('admin.users.disable')}
@@ -252,7 +252,7 @@ const UserManagement = () => {
                                   ) : (
                                     <button
                                       onClick={() => updateStatus(user.id, 'active')}
-                                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-green-400 hover:bg-white/5"
+                                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-green-400 hover:bg-[var(--divider)]/10"
                                     >
                                       <Ban className="w-4 h-4" />
                                       {t('admin.users.enable')}
@@ -260,7 +260,7 @@ const UserManagement = () => {
                                   )}
                                   <button
                                     onClick={() => deleteUser(user.id)}
-                                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-white/5"
+                                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-[var(--divider)]/10"
                                   >
                                     <Trash2 className="w-4 h-4" />
                                     {t('admin.users.delete')}
@@ -285,17 +285,17 @@ const UserManagement = () => {
           <button
             onClick={() => setPage(page - 1)}
             disabled={page === 1}
-            className="px-4 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 disabled:opacity-50"
+            className="px-4 py-2 bg-[var(--bg-alt)] text-[var(--text-2)] rounded-lg hover:bg-[var(--divider)]/20 disabled:opacity-50"
           >
             Previous
           </button>
-          <span className="px-4 py-2 text-gray-400">
+          <span className="px-4 py-2 text-[var(--text-2)]">
             Page {page} of {Math.ceil(total / 10)}
           </span>
           <button
             onClick={() => setPage(page + 1)}
             disabled={page >= Math.ceil(total / 10)}
-            className="px-4 py-2 bg-white/5 text-gray-400 rounded-lg hover:bg-white/10 disabled:opacity-50"
+            className="px-4 py-2 bg-[var(--bg-alt)] text-[var(--text-2)] rounded-lg hover:bg-[var(--divider)]/20 disabled:opacity-50"
           >
             Next
           </button>

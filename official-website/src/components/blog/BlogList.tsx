@@ -13,7 +13,7 @@ const BlogList = ({ posts, language }: BlogListProps) => {
   if (posts.length === 0) {
     return (
       <div className="text-center py-16">
-        <p className="text-gray-400 text-lg">{t('blog.noPosts')}</p>
+        <p className="text-[var(--text-2)] text-lg">{t('blog.noPosts')}</p>
       </div>
     );
   }

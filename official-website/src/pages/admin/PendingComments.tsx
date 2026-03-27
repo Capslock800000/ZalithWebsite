@@ -123,7 +123,7 @@ const PendingComments = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-8">{t('admin.stats.pendingComments')}</h1>
+      <h1 className="text-2xl font-bold text-[var(--text-1)] mb-8">{t('admin.stats.pendingComments')}</h1>
 
       {selectedIds.length > 0 && (
         <div className="flex items-center gap-4 mb-4 p-3 bg-[var(--brand)]/10 border border-[var(--brand)]/30 rounded-lg">
@@ -161,8 +161,8 @@ const PendingComments = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand)]"></div>
         </div>
       ) : comments.length === 0 ? (
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-12 text-center">
-          <p className="text-gray-400">No pending comments</p>
+        <div className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl p-12 text-center">
+          <p className="text-[var(--text-2)]">No pending comments</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -171,22 +171,22 @@ const PendingComments = () => {
               type="checkbox"
               checked={selectedIds.length === comments.length}
               onChange={toggleSelectAll}
-              className="rounded border-white/20 bg-white/5"
+              className="rounded border-[var(--divider)] bg-[var(--bg)]"
             />
-            <span className="text-sm text-gray-400">{t('admin.comments.selectAll')}</span>
+            <span className="text-sm text-[var(--text-2)]">{t('admin.comments.selectAll')}</span>
           </div>
 
           {comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-[#1a1a1a] border border-white/10 rounded-xl p-4"
+              className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl p-4"
             >
               <div className="flex items-start gap-4">
                 <input
                   type="checkbox"
                   checked={selectedIds.includes(comment.id)}
                   onChange={() => toggleSelect(comment.id)}
-                  className="mt-1 rounded border-white/20 bg-white/5"
+                  className="mt-1 rounded border-[var(--divider)] bg-[var(--bg)]"
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
@@ -195,11 +195,11 @@ const PendingComments = () => {
                         {comment.user.username.charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <span className="font-medium text-white">{comment.user.username}</span>
-                    <span className="text-xs text-gray-500">{formatDate(comment.createdAt)}</span>
-                    <span className="text-xs text-gray-500">on {comment.postSlug}</span>
+                    <span className="font-medium text-[var(--text-1)]">{comment.user.username}</span>
+                    <span className="text-xs text-[var(--text-2)]">{formatDate(comment.createdAt)}</span>
+                    <span className="text-xs text-[var(--text-2)]">on {comment.postSlug}</span>
                   </div>
-                  <p className="text-gray-300 text-sm whitespace-pre-wrap">{comment.content}</p>
+                  <p className="text-[var(--text-2)] text-sm whitespace-pre-wrap">{comment.content}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button

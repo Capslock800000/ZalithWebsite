@@ -5,6 +5,7 @@
 .idea
 .trae
 node_modules
+.env
 
 # lock文件
 yarn.lock

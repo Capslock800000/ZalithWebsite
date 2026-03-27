@@ -17,14 +17,14 @@ const StatsCard = ({
   icon: React.ElementType; 
   color: string;
 }) => (
-  <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-6">
+  <div className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl p-6">
     <div className="flex items-center gap-4">
       <div className={`w-12 h-12 rounded-lg ${color} flex items-center justify-center`}>
         <Icon className="w-6 h-6 text-white" />
       </div>
       <div>
-        <p className="text-2xl font-bold text-white">{value}</p>
-        <p className="text-sm text-gray-400">{title}</p>
+        <p className="text-2xl font-bold text-[var(--text-1)]">{value}</p>
+        <p className="text-sm text-[var(--text-2)]">{title}</p>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-8">{t('admin.dashboard')}</h1>
+      <h1 className="text-2xl font-bold text-[var(--text-1)] mb-8">{t('admin.dashboard')}</h1>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <StatsCard

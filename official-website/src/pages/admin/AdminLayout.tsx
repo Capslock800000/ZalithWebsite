@@ -42,12 +42,12 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#1a1a1a] border-b border-white/10 px-4 py-3 flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-white">{t('admin.dashboard')}</h1>
+    <div className="min-h-screen bg-[var(--bg)]">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[var(--bg-alt)] border-b border-[var(--divider)]/20 px-4 py-3 flex items-center justify-between">
+        <h1 className="text-lg font-semibold text-[var(--text-1)]">{t('admin.dashboard')}</h1>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-gray-400 hover:text-white"
+          className="text-[var(--text-2)] hover:text-[var(--text-1)]"
         >
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -55,13 +55,13 @@ const AdminLayout = () => {
 
       <div className="flex">
         <aside
-          className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[#1a1a1a] border-r border-white/10 transform transition-transform duration-200 lg:translate-x-0 ${
+          className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[var(--bg-alt)] border-r border-[var(--divider)]/20 transform transition-transform duration-200 lg:translate-x-0 ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
           <div className="flex flex-col h-full">
-            <div className="p-6 border-b border-white/10">
-              <Link to="/" className="text-xl font-bold text-white">
+            <div className="p-6 border-b border-[var(--divider)]/20">
+              <Link to="/" className="text-xl font-bold text-[var(--text-1)]">
                 Zalith Admin
               </Link>
             </div>
@@ -75,7 +75,7 @@ const AdminLayout = () => {
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors ${
                     isActive(item.href)
                       ? 'bg-[var(--brand)] text-white'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                      : 'text-[var(--text-2)] hover:bg-[var(--divider)]/10 hover:text-[var(--text-1)]'
                   }`}
                 >
                   <item.icon className="w-5 h-5" />
@@ -84,7 +84,7 @@ const AdminLayout = () => {
               ))}
             </nav>
 
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-[var(--divider)]/20">
               <div className="flex items-center gap-3 mb-4 px-4">
                 <div className="w-8 h-8 rounded-full bg-[var(--brand)]/20 flex items-center justify-center">
                   <span className="text-[var(--brand)] text-sm font-semibold">
@@ -92,13 +92,13 @@ const AdminLayout = () => {
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-white truncate">{user.username}</p>
-                  <p className="text-xs text-gray-500">{user.role}</p>
+                  <p className="text-sm text-[var(--text-1)] truncate">{user.username}</p>
+                  <p className="text-xs text-[var(--text-2)]">{user.role}</p>
                 </div>
               </div>
               <button
                 onClick={logout}
-                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                className="flex items-center gap-2 w-full px-4 py-2 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--divider)]/10 rounded-lg transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 {t('auth.logout')}

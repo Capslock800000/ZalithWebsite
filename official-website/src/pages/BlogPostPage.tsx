@@ -51,10 +51,10 @@ const BlogPostPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] pt-20">
+      <div className="min-h-screen bg-[var(--bg)] pt-20">
         <div className="text-center py-16">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand)] mx-auto"></div>
-          <p className="text-gray-400 mt-4">{t('common.loading')}</p>
+          <p className="text-[var(--text-2)] mt-4">{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -62,9 +62,9 @@ const BlogPostPage = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] pt-20">
+      <div className="min-h-screen bg-[var(--bg)] pt-20">
         <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">{t('blog.notFound')}</h1>
+          <h1 className="text-2xl font-bold text-[var(--text-1)] mb-4">{t('blog.notFound')}</h1>
           <Link
             to={`/${language}/blog`}
             className="inline-flex items-center gap-2 text-[var(--brand)] hover:underline"
@@ -78,20 +78,20 @@ const BlogPostPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-20">
+    <div className="min-h-screen bg-[var(--bg)] pt-20">
       <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header className="mb-12 max-w-4xl">
           <Link
             to={`/${language}/blog`}
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-[var(--text-2)] hover:text-[var(--brand)] transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             {t('blog.backToList')}
           </Link>
 
-          <h1 className="text-4xl font-bold text-white mb-4">{post.title}</h1>
+          <h1 className="text-4xl font-bold text-[var(--text-1)] mb-4">{post.title}</h1>
           
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-6">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--text-2)] mb-6">
             <div className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
               <span>{post.date}</span>
@@ -107,7 +107,7 @@ const BlogPostPage = () => {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-white/5 rounded-full text-xs text-gray-400"
+                  className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--bg-alt)] rounded-full text-xs text-[var(--text-2)]"
                 >
                   <Tag className="w-3 h-3" />
                   {tag}
@@ -120,20 +120,20 @@ const BlogPostPage = () => {
         <div className="flex gap-8">
           <div className="flex-1 max-w-4xl">
             <div
-              className="prose prose-invert prose-lg max-w-none
-                prose-headings:text-white prose-headings:font-semibold
-                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+              className="prose prose-lg max-w-none
+                prose-headings:text-[var(--text-1)] prose-headings:font-semibold
+                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:border-b prose-h2:border-[var(--divider)] prose-h2:pb-2
                 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-                prose-p:text-gray-300 prose-p:leading-relaxed
+                prose-p:text-[var(--text-2)] prose-p:leading-relaxed
                 prose-a:text-[var(--brand)] prose-a:no-underline hover:prose-a:underline
-                prose-code:text-[var(--brand)] prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-                prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/10
-                prose-blockquote:border-[var(--brand)] prose-blockquote:text-gray-400
-                prose-img:rounded-lg prose-img:border prose-img:border-white/10"
+                prose-code:text-[var(--brand)] prose-code:bg-[var(--bg-alt)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+                prose-pre:bg-[var(--bg-alt)] prose-pre:border prose-pre:border-[var(--divider)]/30
+                prose-blockquote:border-[var(--brand)] prose-blockquote:text-[var(--text-2)]
+                prose-img:rounded-lg prose-img:border prose-img:border-[var(--divider)]/30"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
 
-            <div className="mt-16 pt-8 border-t border-white/10">
+            <div className="mt-16 pt-8 border-t border-[var(--divider)]/30">
               <CommentSection postSlug={post.slug} />
             </div>
           </div>

@@ -31,11 +31,11 @@ const BlogListPage = () => {
     : posts;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] pt-20">
+    <div className="min-h-screen bg-[var(--bg)] pt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header className="mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">{t('blog.title')}</h1>
-          <p className="text-gray-400 text-lg">{t('blog.subtitle')}</p>
+          <h1 className="text-4xl font-bold text-[var(--text-1)] mb-4">{t('blog.title')}</h1>
+          <p className="text-[var(--text-2)] text-lg">{t('blog.subtitle')}</p>
         </header>
 
         {allTags.length > 0 && (
@@ -46,7 +46,7 @@ const BlogListPage = () => {
                 className={`px-4 py-2 rounded-full text-sm transition-colors ${
                   selectedTag === null
                     ? 'bg-[var(--brand)] text-white'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                    : 'bg-[var(--bg-alt)] text-[var(--text-2)] hover:bg-[var(--divider)]/30'
                 }`}
               >
                 {t('blog.allTags')}
@@ -58,7 +58,7 @@ const BlogListPage = () => {
                   className={`px-4 py-2 rounded-full text-sm transition-colors ${
                     selectedTag === tag
                       ? 'bg-[var(--brand)] text-white'
-                      : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                      : 'bg-[var(--bg-alt)] text-[var(--text-2)] hover:bg-[var(--divider)]/30'
                   }`}
                 >
                   {tag}
@@ -71,7 +71,7 @@ const BlogListPage = () => {
         {loading ? (
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand)] mx-auto"></div>
-            <p className="text-gray-400 mt-4">{t('common.loading')}</p>
+            <p className="text-[var(--text-2)] mt-4">{t('common.loading')}</p>
           </div>
         ) : (
           <BlogList posts={filteredPosts} language={language} />

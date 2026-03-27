@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { Lock, Mail } from 'lucide-react';
 
-const AdminLogin = () => {
+const LoginPage = () => {
   const { t } = useTranslation();
-  const { user, login, loading } = useAuth();
+  const { login, loading, user } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,10 +14,10 @@ const AdminLogin = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (user && (user.role === 'admin' || user.role === 'moderator')) {
-      navigate('/admin');
+    if (user && !loading) {
+      navigate('/');
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,8 +26,9 @@ const AdminLogin = () => {
 
     try {
       await login({ email, password });
+      navigate('/');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : t('auth.loginFailed'));
     } finally {
       setSubmitting(false);
     }
@@ -42,11 +43,14 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center px-4 pt-16">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[var(--text-1)] mb-2">Admin Login</h1>
-          <p className="text-[var(--text-2)]">Sign in to access the admin dashboard</p>
+          <Link to="/" className="inline-block mb-6">
+            <img src="/zl_icon.webp" alt="Logo" className="w-12 h-12 rounded-lg mx-auto" />
+          </Link>
+          <h1 className="text-3xl font-bold text-[var(--text-1)] mb-2">{t('auth.login')}</h1>
+          <p className="text-[var(--text-2)]">{t('auth.loginSubtitle')}</p>
         </div>
 
         <div className="bg-[var(--bg-alt)] border border-[var(--divider)]/20 rounded-xl p-6">
@@ -90,15 +94,25 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-2.5 bg-[var(--brand)] text-white rounded-lg hover:bg-[var(--brand)]/80 transition-colors disabled:opacity-50"
+              className="w-full py-2.5 bg-[var(--brand)] text-white rounded-lg hover:opacity-90 transition-colors disabled:opacity-50"
             >
               {submitting ? t('common.loading') : t('auth.login')}
             </button>
           </form>
+
+          <p className="mt-4 text-center text-sm text-[var(--text-2)]">
+            {t('auth.noAccount')}{' '}
+            <Link
+              to="/register"
+              className="text-[var(--brand)] hover:underline"
+            >
+              {t('auth.register')}
+            </Link>
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default AdminLogin;
+export default LoginPage;
